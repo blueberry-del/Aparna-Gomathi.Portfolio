@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aparna Gomathi — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Spectral:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+/* ── SHARED TOKENS ── */
+:root {
+  --ink: #1c1a16;
+  --parchment: #f0ebe0;
+  --warm-paper: #e8e0cf;
+  --burnt: #8b4a2b;
+  --moss: #4a5e3a;
+  --ochre: #c17f3a;
+  --charcoal: #3a3530;
+  --dust: #b8ad9e;
+  --faint: #d4cdc0;
+}
+
+body {
+  background: var(--parchment);
+  font-family: 'Spectral', Georgia, serif;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* grain layer that sits over everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.45;
+}
+
+/* ════════════════════════════════════
+   BLOCK 01 — HERO
+════════════════════════════════════ */
+.ap-hero {
+  padding: 4rem 4rem 5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP ROW */
+.ap-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  opacity: 0;
+  animation: apFade 1s ease 0.2s forwards;
+}
+.ap-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  line-height: 1.7;
+}
+.ap-tamil-top { text-align: right; }
+.ap-tamil-top span {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--moss);
+  line-height: 1.5;
+}
+.ap-tamil-top small {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+
+/* CONSTELLATION DIAGRAM */
+.ap-diagram-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  opacity: 0;
+  animation: apFade 1.4s ease 0.6s forwards;
+}
+.ap-diagram-wrap svg {
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+}
+
+/* ABOUT */
+.ap-about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 5rem;
+  align-items: start;
+  border-top: 1px solid var(--faint);
+  padding-top: 3rem;
+  opacity: 0;
+  animation: apFade 1s ease 1.2s forwards;
+}
+.ap-about-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.ap-about-left h2 em { font-style: italic; color: var(--burnt); display: block; }
+.ap-about-roles { margin-top: 2rem; display: flex; flex-direction: column; }
+.ap-about-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--moss);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--faint);
+}
+.ap-about-right p {
+  font-size: 0.97rem;
+  line-height: 1.95;
+  color: var(--charcoal);
+  font-weight: 300;
+  margin-bottom: 1.4rem;
+}
+.ap-about-right p:first-child {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+/* ════════════════════════════════════
+   BLOCK 02 — SELECTED WORK NAV
+════════════════════════════════════ */
+.ap-work {
+  border-top: 1px solid var(--faint);
+  padding: 5rem 4rem 6rem;
+}
+
+.ap-work-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.ap-work-header.visible { opacity: 1; transform: none; }
+
+.ap-work-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.ap-work-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--faint);
+}
+
+/* Work grid */
+.ap-work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--faint);
+  border: 1px solid var(--faint);
+}
+
+/* each project card */
+.ap-card {
+  background: var(--parchment);
+  padding: 3rem 3rem 2.8rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.35s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease, background 0.3s ease;
+}
+.ap-card.visible { opacity: 1; transform: none; }
+.ap-card:hover { background: var(--warm-paper); }
+
+/* ghost number */
+.ap-card-ghost {
+  position: absolute;
+  bottom: -1rem;
+  right: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--faint);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+.ap-card:hover .ap-card-ghost { color: var(--warm-paper); }
+
+.ap-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ap-card-index {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+
+.ap-card-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+.ap-card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+
+.ap-card-body { margin-top: 2.5rem; }
+
+.ap-card-annotation {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.ap-card-annotation::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  flex-shrink: 0;
+}
+
+/* per-card accent colours */
+.ap-card--tyre .ap-card-annotation { color: var(--ochre); }
+.ap-card--tyre .ap-card-annotation::before { background: var(--ochre); }
+.ap-card--tyre .ap-card-arrow { color: var(--ochre); border-color: var(--ochre); }
+
+.ap-card--dhh .ap-card-annotation { color: var(--burnt); }
+.ap-card--dhh .ap-card-annotation::before { background: var(--burnt); }
+.ap-card--dhh .ap-card-arrow { color: var(--burnt); border-color: var(--burnt); }
+
+.ap-card--learnings .ap-card-annotation { color: var(--moss); }
+.ap-card--learnings .ap-card-annotation::before { background: var(--moss); }
+.ap-card--learnings .ap-card-arrow { color: var(--moss); border-color: var(--moss); }
+
+.ap-card--inspo .ap-card-annotation { color: var(--charcoal); }
+.ap-card--inspo .ap-card-annotation::before { background: var(--charcoal); }
+.ap-card--inspo .ap-card-arrow { color: var(--charcoal); border-color: var(--charcoal); }
+
+.ap-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.ap-card-desc {
+  font-family: 'Spectral', serif;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--charcoal);
+  font-weight: 300;
+  max-width: 340px;
+}
+
+.ap-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--faint);
+  padding-top: 1.2rem;
+}
+
+.ap-card-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dust);
+  line-height: 1.6;
+}
+
+.ap-card-arrow {
+  width: 36px;
+  height: 36px;
+  border: 1px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease, background 0.2s ease;
+  flex-shrink: 0;
+}
+.ap-card:hover .ap-card-arrow { transform: translate(3px, -3px); }
+
+/* small card variant for learnings + inspo (bottom row) */
+.ap-card--small { min-height: 220px; }
+
+/* ════════════════════════════════════
+   BLOCK 03 — LEARNINGS (MARGINALIA)
+════════════════════════════════════ */
+.ap-mg {
+  border-top: 1px solid var(--faint);
+  padding: 6rem 0 8rem;
+  position: relative;
+}
+
+.ap-mg-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dust);
+  padding: 0 4rem;
+  margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.ap-mg-label::after { content: ''; width: 50px; height: 1px; background: var(--faint); }
+
+.ap-mg-row {
+  position: relative;
+  padding: 4rem 4rem;
+  border-top: 1px solid var(--faint);
+  display: grid;
+  align-items: start;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.ap-mg-row.visible { opacity: 1; transform: none; }
+.ap-mg-row.left { grid-template-columns: 3rem 1fr 1.2fr 1fr; }
+.ap-mg-row.right { grid-template-columns: 1fr 1.2fr 1fr 3rem; direction: rtl; }
+.ap-mg-row.right .ap-mg-content { direction: ltr; }
+.ap-mg-row.right .ap-mg-ghost { direction: ltr; }
+.ap-mg-row:last-child { border-bottom: 1px solid var(--faint); }
+
+.ap-mg-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--dust);
+  padding-top: 0.4rem;
+}
+
+.ap-mg-ghost {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--faint);
+  line-height: 1;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ap-mg-content { padding: 0 2rem; }
+
+.ap-mg-annotation {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--burnt);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.ap-mg-annotation::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--burnt);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.ap-mg-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.ap-mg-text {
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: var(--charcoal);
+  font-weight: 300;
+  max-width: 420px;
+}
+
+.ap-mg-mark { display: flex; flex-direction: column; align-items: center; padding-top: 0.5rem; gap: 0.3rem; opacity: 0.3; }
+.ap-mg-mark svg { width: 16px; }
+
+/* ── ANIMATIONS ── */
+@keyframes apFade {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .ap-hero, .ap-work { padding-left: 2rem; padding-right: 2rem; }
+  .ap-about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ap-top-row { flex-direction: column; gap: 1rem; }
+  .ap-tamil-top { text-align: left; }
+  .ap-work-grid { grid-template-columns: 1fr; }
+  .ap-mg-row.left, .ap-mg-row.right { grid-template-columns: 2rem 1fr; padding: 3rem 2rem; direction: ltr; }
+  .ap-mg-ghost { display: none; }
+  .ap-mg-mark { display: none; }
+  .ap-mg-content { padding: 0 0 0 1.5rem; }
+}
+</style>
+
+<!-- ════════════════════════════════════════════════
+     BLOCK 01: HERO
+════════════════════════════════════════════════ -->
+<section class="ap-hero">
+
+  <div class="ap-top-row">
+    <div class="ap-name">Aparna Gomathi<br>Nataraja Pandian</div>
+    <div class="ap-tamil-top">
+      <span>கூடி வாழ்ந்தால் கோடி நன்மை</span>
+      <small>Koodi vaazhndhal kodi nanmai</small>
+    </div>
+  </div>
+
+  <!-- constellation diagram -->
+  <div class="ap-diagram-wrap">
+    <svg viewBox="0 0 680 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="60" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="200" cy="40" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="480" cy="50" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="600" cy="80" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="60" cy="200" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="620" cy="220" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="100" cy="360" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="580" cy="370" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="340" cy="30" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <circle cx="340" cy="400" r="1" fill="#b8ad9e" opacity="0.3"/>
+      <path d="M340 210 C300 190 220 160 148 120" stroke="#b8ad9e" stroke-width="0.8" opacity="0.6" stroke-dasharray="3 4"/>
+      <path d="M340 210 C375 185 440 155 532 118" stroke="#b8ad9e" stroke-width="0.8" opacity="0.6" stroke-dasharray="3 4"/>
+      <path d="M340 210 C305 235 230 265 148 300" stroke="#b8ad9e" stroke-width="0.8" opacity="0.6" stroke-dasharray="3 4"/>
+      <path d="M340 210 C372 232 438 262 532 302" stroke="#b8ad9e" stroke-width="0.8" opacity="0.6" stroke-dasharray="3 4"/>
+      <path d="M148 120 C240 100 440 100 532 118" stroke="#d4cdc0" stroke-width="0.5" opacity="0.4" stroke-dasharray="2 6"/>
+      <path d="M148 300 C240 320 440 320 532 302" stroke="#d4cdc0" stroke-width="0.5" opacity="0.4" stroke-dasharray="2 6"/>
+      <path d="M148 120 C130 200 135 250 148 300" stroke="#d4cdc0" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 6"/>
+      <path d="M532 118 C548 200 545 255 532 302" stroke="#d4cdc0" stroke-width="0.5" opacity="0.3" stroke-dasharray="2 6"/>
+      <path d="M148 120 C120 95 95 85 72 78" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="68" cy="76" r="2.5" fill="#b8ad9e" opacity="0.5"/>
+      <path d="M148 120 C140 90 138 72 145 55" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="145" cy="52" r="2" fill="#b8ad9e" opacity="0.4"/>
+      <path d="M532 118 C558 92 572 80 592 72" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="595" cy="70" r="2.5" fill="#b8ad9e" opacity="0.5"/>
+      <path d="M532 118 C540 90 542 72 535 55" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="534" cy="52" r="2" fill="#b8ad9e" opacity="0.4"/>
+      <path d="M148 300 C118 318 95 330 70 342" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="67" cy="344" r="2.5" fill="#b8ad9e" opacity="0.5"/>
+      <path d="M148 300 C138 328 138 348 145 365" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="145" cy="368" r="2" fill="#b8ad9e" opacity="0.4"/>
+      <path d="M532 302 C558 318 575 330 598 340" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="601" cy="342" r="2.5" fill="#b8ad9e" opacity="0.5"/>
+      <path d="M532 302 C540 328 540 348 534 366" stroke="#d4cdc0" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="534" cy="369" r="2" fill="#b8ad9e" opacity="0.4"/>
+      <circle cx="340" cy="210" r="22" fill="#f0ebe0" stroke="#4a5e3a" stroke-width="1" opacity="0.9"/>
+      <circle cx="340" cy="210" r="14" fill="#f0ebe0" stroke="#4a5e3a" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="340" cy="210" r="4" fill="#4a5e3a" opacity="0.7"/>
+      <text x="340" y="244" font-family="'DM Mono', monospace" font-size="7.5" fill="#4a5e3a" opacity="0.7" text-anchor="middle" letter-spacing="1.5">PRACTICE</text>
+      <circle cx="148" cy="120" r="18" fill="#f0ebe0" stroke="#8b4a2b" stroke-width="1"/>
+      <circle cx="148" cy="120" r="5" fill="#8b4a2b" opacity="0.6"/>
+      <line x1="148" y1="102" x2="148" y2="88" stroke="#8b4a2b" stroke-width="0.7" opacity="0.5"/>
+      <line x1="148" y1="88" x2="60" y2="88" stroke="#8b4a2b" stroke-width="0.7" opacity="0.5"/>
+      <text x="58" y="85" font-family="'DM Mono', monospace" font-size="8" fill="#8b4a2b" text-anchor="end" letter-spacing="1">DESIGN</text>
+      <text x="58" y="97" font-family="'DM Mono', monospace" font-size="8" fill="#8b4a2b" text-anchor="end" letter-spacing="1">RESEARCH</text>
+      <circle cx="532" cy="118" r="18" fill="#f0ebe0" stroke="#4a5e3a" stroke-width="1"/>
+      <circle cx="532" cy="118" r="5" fill="#4a5e3a" opacity="0.6"/>
+      <line x1="532" y1="100" x2="532" y2="86" stroke="#4a5e3a" stroke-width="0.7" opacity="0.5"/>
+      <line x1="532" y1="86" x2="622" y2="86" stroke="#4a5e3a" stroke-width="0.7" opacity="0.5"/>
+      <text x="625" y="83" font-family="'DM Mono', monospace" font-size="8" fill="#4a5e3a" text-anchor="start" letter-spacing="1">PLURIVERSE</text>
+      <text x="625" y="95" font-family="'DM Mono', monospace" font-size="8" fill="#4a5e3a" text-anchor="start" letter-spacing="1">THINKING</text>
+      <circle cx="200" cy="300" r="18" fill="#f0ebe0" stroke="#c17f3a" stroke-width="1"/>
+      <circle cx="200" cy="300" r="5" fill="#c17f3a" opacity="0.6"/>
+      <line x1="200" y1="318" x2="200" y2="332" stroke="#c17f3a" stroke-width="0.7" opacity="0.5"/>
+      <line x1="200" y1="332" x2="110" y2="332" stroke="#c17f3a" stroke-width="0.7" opacity="0.5"/>
+      <text x="106" y="328" font-family="'DM Mono', monospace" font-size="8" fill="#c17f3a" text-anchor="end" letter-spacing="1">DECOLONIAL</text>
+      <text x="106" y="340" font-family="'DM Mono', monospace" font-size="8" fill="#c17f3a" text-anchor="end" letter-spacing="1">PRACTICE</text>
+      <circle cx="480" cy="302" r="18" fill="#f0ebe0" stroke="#3a3530" stroke-width="1"/>
+      <circle cx="480" cy="302" r="5" fill="#3a3530" opacity="0.6"/>
+      <line x1="480" y1="320" x2="480" y2="334" stroke="#3a3530" stroke-width="0.7" opacity="0.5"/>
+      <line x1="480" y1="334" x2="570" y2="334" stroke="#3a3530" stroke-width="0.7" opacity="0.5"/>
+      <text x="574" y="331" font-family="'DM Mono', monospace" font-size="8" fill="#3a3530" text-anchor="start" letter-spacing="1">ILLUSTRATION</text>
+      <text x="310" y="200" font-family="'Cormorant Garamond', serif" font-size="9" fill="#b8ad9e" text-anchor="middle" font-style="italic" opacity="0.6">koodi</text>
+      <text x="370" y="222" font-family="'Cormorant Garamond', serif" font-size="9" fill="#b8ad9e" text-anchor="middle" font-style="italic" opacity="0.6">vaazhndhal</text>
+    </svg>
+  </div>
+
+  <!-- about -->
+  <div class="ap-about-wrap">
+    <div class="ap-about-left">
+      <h2>Designer<br><em>&amp; Illustrator</em></h2>
+      <div class="ap-about-roles">
+        <span class="ap-about-role">Design Research</span>
+        <span class="ap-about-role">Illustration</span>
+        <span class="ap-about-role">Decolonial Practice</span>
+        <span class="ap-about-role">Pluriverse Thinking</span>
+        <span class="ap-about-role">Community Learning</span>
+      </div>
+    </div>
+    <div class="ap-about-right">
+      <p>I'm a designer and illustrator whose practice is rooted in understanding the ways in which knowledge and cultural hegemony manifest. Knowledge and culture that was never lost, only kept from being remembered, learned, shared and passed down. My work is shaped by a belief in the Pluriverse: that there are many valid ways of knowing, being and living, and that design has a responsibility to understand and learn from them rather than extract from or flatten them.</p>
+      <p>Children are also central to this practice. They are not just the future of our communities — they are already part of them, bringing ways of seeing and believing that adults have often forgotten how to access. Designing with and for children is, for me, inseparable from designing for a more honest world.</p>
+      <p>My work spans design research, ergonomics, community learning and unlearning. What holds it together is seeing design as a form of inquiry that takes seriously the knowledge which was never given the title of knowledge.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════════════
+     BLOCK 02 — SELECTED WORK
+════════════════════════════════════════════════ -->
+<section class="ap-work">
+
+  <div class="ap-work-header">
+    <span class="ap-work-label">Selected Work</span>
+  </div>
+
+  <div class="ap-work-grid">
+
+    <!-- TYRE PROJECT -->
+    <a class="ap-card ap-card--tyre" href="./tyre-project.html">
+      <div class="ap-card-ghost">01</div>
+      <div class="ap-card-top">
+        <span class="ap-card-index">01 / 04</span>
+        <div class="ap-card-tags">
+          <span class="ap-card-tag">Ergonomics</span>
+          <span class="ap-card-tag">Field Research</span>
+        </div>
+      </div>
+      <div class="ap-card-body">
+        <div class="ap-card-annotation">Ergonomics</div>
+        <h2 class="ap-card-title">Work Related Musculo Skeletal Disorders in Tyre Cutters</h2>
+        <p class="ap-card-desc">An ergonomic and field research study into the physical demands of tyre cutting, identifying risk and proposing intervention to reduce strain.</p>
+      </div>
+      <div class="ap-card-footer">
+        <div class="ap-card-meta">Field Research<br>Ergonomics · Tools</div>
+        <div class="ap-card-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- DHH PROJECT -->
+    <a class="ap-card ap-card--dhh" href="./dhh-portfolio.html">
+      <div class="ap-card-ghost">02</div>
+      <div class="ap-card-top">
+        <span class="ap-card-index">02 / 04</span>
+        <div class="ap-card-tags">
+          <span class="ap-card-tag">Edtech</span>
+          <span class="ap-card-tag">Inclusive Design</span>
+        </div>
+      </div>
+      <div class="ap-card-body">
+        <div class="ap-card-annotation">UX Research &amp; Design</div>
+        <h2 class="ap-card-title">Design Intervention<br>for DHH Children</h2>
+        <p class="ap-card-desc">Field research and app design for Deaf &amp; Hard of Hearing children in India — identifying gaps in teaching and building vocabulary tools rooted in ISL.</p>
+      </div>
+      <div class="ap-card-footer">
+        <div class="ap-card-meta">Justice Tankha Memorial Institute<br>Jabalpur (MP) · Team of 5</div>
+        <div class="ap-card-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- LEARNINGS -->
+    <a class="ap-card ap-card--learnings ap-card--small" href="./learnings.html">
+      <div class="ap-card-ghost">03</div>
+      <div class="ap-card-top">
+        <span class="ap-card-index">03 / 04</span>
+        <div class="ap-card-tags">
+          <span class="ap-card-tag">Decolonial</span>
+          <span class="ap-card-tag">Pluriverse</span>
+        </div>
+      </div>
+      <div class="ap-card-body">
+        <div class="ap-card-annotation">Unlearning</div>
+        <h2 class="ap-card-title">What knowledge lives outside the archive?</h2>
+        <p class="ap-card-desc">A compilation of ongoing readings, conversations, and inherited stories examined through the lens of nature connection, power in social systems, what it means to be a community.</p>
+      </div>
+      <div class="ap-card-footer">
+        <div class="ap-card-meta">Ongoing · Reflections</div>
+        <div class="ap-card-arrow">↗</div>
+      </div>
+    </a>
+
+    <!-- INSPIRATION DASHBOARD -->
+    <a class="ap-card ap-card--inspo ap-card--small" href="./inspiration.html">
+      <div class="ap-card-ghost">04</div>
+      <div class="ap-card-top">
+        <span class="ap-card-index">04 / 04</span>
+        <div class="ap-card-tags">
+          <span class="ap-card-tag">References</span>
+          <span class="ap-card-tag">Visual</span>
+        </div>
+      </div>
+      <div class="ap-card-body">
+        <div class="ap-card-annotation">Visual Archive</div>
+        <h2 class="ap-card-title">A board of things that are shaping the thinking</h2>
+        <p class="ap-card-desc">Books, documents, conversations, images. Things encountered while reading, doing fieldwork, or just paying attention.</p>
+      </div>
+      <div class="ap-card-footer">
+        <div class="ap-card-meta">Ongoing · Living Document</div>
+        <div class="ap-card-arrow">↗</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     BLOCK 03 — HOW I THINK (MARGINALIA)
+════════════════════════════════════════════════ -->
+<section class="ap-mg">
+
+  <div class="ap-mg-label">Learnings</div>
+
+  <div class="ap-mg-row left">
+    <div></div>
+    <div class="ap-mg-content">
+      <div class="ap-mg-annotation">Decolonial inquiry</div>
+      <p class="ap-mg-text">Tracing how knowledge systems were suppressed under colonialism and asking what design would look like if we try to understand and value them for what they are.</p>
+    </div>
+    <div class="ap-mg-ghost">memory</div>
+    <div class="ap-mg-mark">
+      <svg viewBox="0 0 16 60" fill="none"><path d="M8 2 C4 10 4 20 8 30 C12 40 12 50 8 58" stroke="#3a3530" stroke-width="1" fill="none"/></svg>
+    </div>
+  </div>
+
+  <div class="ap-mg-row right">
+    <div></div>
+    <div class="ap-mg-content">
+      <div class="ap-mg-annotation">Relational thinking</div>
+      <p class="ap-mg-text">Drawing from indigenous epistemologies that understand humans as part of, not separate from, ecological and social systems.</p>
+    </div>
+    <div class="ap-mg-ghost">relation</div>
+    <div class="ap-mg-mark">
+      <svg viewBox="0 0 16 60" fill="none"><path d="M8 2 C12 10 12 20 8 30 C4 40 4 50 8 58" stroke="#3a3530" stroke-width="1" fill="none"/></svg>
+    </div>
+  </div>
+
+  <div class="ap-mg-row left">
+    <div></div>
+    <div class="ap-mg-content">
+      <div class="ap-mg-annotation">Unlearning</div>
+      <p class="ap-mg-text">A big part of learning for me currently is also to unlearn the practice of designing for communities, and instead to design and build from within communities and contexts.</p>
+    </div>
+    <div class="ap-mg-ghost">within</div>
+    <div class="ap-mg-mark">
+      <svg viewBox="0 0 16 60" fill="none"><path d="M8 2 C12 10 12 20 8 30 C4 40 4 50 8 58" stroke="#3a3530" stroke-width="1" fill="none"/></svg>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  // Intersection observer for scroll reveals
+  const reveals = document.querySelectorAll('.ap-mg-row, .ap-work-header, .ap-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.classList.contains('ap-card')
+          ? [...document.querySelectorAll('.ap-card')].indexOf(entry.target) * 100
+          : entry.target.classList.contains('ap-mg-row')
+            ? [...document.querySelectorAll('.ap-mg-row')].indexOf(entry.target) * 150
+            : 0;
+        setTimeout(() => entry.target.classList.add('visible'), delay);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</html>
